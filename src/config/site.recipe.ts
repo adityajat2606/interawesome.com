@@ -8,7 +8,7 @@ export const SITE_RECIPE: SiteRecipe = {
   footerTemplate: 'columns-footer',
   motionPack: 'minimal',
   primaryTask: 'listing',
-  enabledTasks: ['listing'],
+  enabledTasks: ['listing', 'classified', 'article', 'image', 'profile', 'sbm'],
   taskTemplates: { listing: 'listing-directory' },
   manualOverrides: {
     navbar: false,

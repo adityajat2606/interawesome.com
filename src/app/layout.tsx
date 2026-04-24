@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { AuthProvider } from '@/lib/auth-context'
 import { buildSiteMetadata } from '@/lib/seo'
 import { getFactoryState } from '@/design/factory/get-factory-state'
+import { SITE_THEME } from '@/config/site.theme'
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildSiteMetadata()
@@ -19,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        data-site-shell={recipe.homeLayout}
+        data-site-shell={SITE_THEME.shell}
         data-motion-pack={recipe.motionPack}
         className={`${brandPack.bodyClassName} ${brandPack.fontClassName} ${brandPack.paletteClassName}`}
       >

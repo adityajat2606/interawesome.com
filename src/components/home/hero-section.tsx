@@ -7,21 +7,22 @@ import { Button } from "@/components/ui/button";
 import { ContentImage } from "@/components/shared/content-image";
 import { SITE_CONFIG, type TaskConfig } from "@/lib/site-config";
 import { siteContent } from "@/config/site.content";
+import { siteIdentity } from "@/config/site.identity";
 import { SITE_THEME } from "@/config/site.theme";
 
 const FALLBACK_IMAGE = "/placeholder.svg?height=1400&width=2400";
 
 const heroClasses = {
   'search-first': {
-    section: 'border-b border-slate-200 bg-[linear-gradient(180deg,#edf5ff_0%,#f8fbff_42%,#ffffff_100%)] text-slate-950',
-    overlay: 'bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.18),transparent_26%),radial-gradient(circle_at_top_right,rgba(15,23,42,0.12),transparent_26%)]',
+    section: 'border-b border-[#061e29]/10 bg-[linear-gradient(180deg,#ffffff_0%,#f3f4f4_48%,#eef1f2_100%)] text-[#061e29]',
+    overlay: 'bg-[radial-gradient(circle_at_top_left,rgba(29,84,109,0.12),transparent_28%),radial-gradient(circle_at_top_right,rgba(95,149,152,0.14),transparent_26%)]',
     grid: 'lg:grid-cols-[1.08fr_0.92fr]',
-    card: 'border border-white/70 bg-white/80 shadow-[0_28px_90px_rgba(15,23,42,0.12)]',
-    title: 'text-slate-950',
+    card: 'border border-[#061e29]/10 bg-white/90 shadow-[0_22px_70px_rgba(6,30,41,0.1)] backdrop-blur-sm',
+    title: 'text-[#061e29]',
     body: 'text-slate-600',
-    badge: 'bg-slate-950 text-white',
-    primary: 'bg-slate-950 text-white hover:bg-slate-800',
-    secondary: 'border border-slate-200 bg-white text-slate-900 hover:bg-slate-100',
+    badge: 'border border-[#5f9598]/35 bg-[#061e29] text-[#f3f4f4]',
+    primary: 'bg-[#1d546d] text-[#f3f4f4] hover:bg-[#5f9598]',
+    secondary: 'border border-[#061e29]/12 bg-white text-[#061e29] hover:border-[#5f9598]/45',
   },
   'spotlight-split': {
     section: 'border-b border-[rgba(123,72,35,0.14)] bg-[linear-gradient(180deg,#1f1613_0%,#2d1d17_50%,#fff7ed_100%)] text-white',
@@ -102,9 +103,10 @@ export function HeroSection({ images, tasks }: { images: string[]; tasks: TaskCo
               {SITE_THEME.hero.eyebrow}
             </div>
             <h1 className={`mt-6 text-5xl font-semibold tracking-[-0.06em] sm:text-6xl ${palette.title}`}>
-              {siteContent.hero.title[0]} <span className="block opacity-90">{siteContent.hero.title[1]}</span>
+              {siteIdentity.name}{" "}
+              <span className="block text-3xl font-semibold opacity-90 sm:text-4xl">{siteIdentity.tagline}</span>
             </h1>
-            <p className={`mt-6 max-w-2xl text-base leading-8 sm:text-lg ${palette.body}`}>{siteContent.hero.description}</p>
+            <p className={`mt-6 max-w-2xl text-base leading-8 sm:text-lg ${palette.body}`}>{siteIdentity.description}</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className={`rounded-full px-6 ${palette.primary}`}>
@@ -112,9 +114,6 @@ export function HeroSection({ images, tasks }: { images: string[]; tasks: TaskCo
                   {siteContent.hero.primaryCta.label}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className={`rounded-full px-6 ${palette.secondary}`}>
-                <Link href={siteContent.hero.secondaryCta.href}>{siteContent.hero.secondaryCta.label}</Link>
               </Button>
             </div>
 
