@@ -53,7 +53,7 @@ export const siteTaskDefinitions = [
     route: '/blog',
     description: 'Commentary and response posts.',
     contentType: 'article',
-    enabled: false,
+    enabled: true,
   },
   {
     key: 'pdf',
@@ -69,7 +69,7 @@ export const siteTaskDefinitions = [
     route: '/team',
     description: 'Organization profiles and directories.',
     contentType: 'profile',
-    enabled: false,
+    enabled: true,
   },
 ] as const
 

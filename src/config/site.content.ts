@@ -2,75 +2,79 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Independent reading platform',
+    tagline: '',
   },
   footer: {
-    tagline: 'Stories, resources, and discoverable posts',
+    tagline: 'Trusted directory for brands and buyers',
   },
   hero: {
-    badge: 'Latest stories and visuals',
-    title: ['A thoughtful home for', 'stories, visuals, and discovery.'],
+    badge: 'Featured on the directory',
+    title: ['Find the right business,', 'faster—with clear listings you can trust.'],
     description:
-      'Explore fresh articles, image-led posts, and discoverable content across the platform through a calmer and clearer browsing experience.',
+      'Search companies, services, and local operators in one calm directory. Every listing is structured for quick scanning, location context, and confident next steps.',
     primaryCta: {
-      label: 'Read latest stories',
-      href: '/articles',
+      label: 'Browse business listings',
+      href: '/listings',
     },
-    secondaryCta: {
-      label: 'Explore visuals',
-      href: '/images',
-    },
-    searchPlaceholder: 'Search stories, visuals, listings, and more',
+    searchPlaceholder: 'Search companies and businesses',
     focusLabel: 'Focus',
-    featureCardBadge: 'latest cover rotation',
-    featureCardTitle: 'Latest posts shape the visual identity of the homepage.',
+    featureCardBadge: 'Directory spotlight',
+    featureCardTitle: 'Fresh listings anchor the homepage experience.',
     featureCardDescription:
-      'Recent images and stories stay at the center of the experience without changing any core platform behavior.',
+      'New and notable businesses stay visible at the top while the rest of the platform stays fully connected underneath.',
   },
   home: {
     metadata: {
-      title: 'Stories, visuals, and discoverable content',
+      title: 'Business listings and trusted local discovery',
       description:
-        'Explore articles, images, listings, and curated posts through a cleaner reading-first experience.',
-      openGraphTitle: 'Stories, visuals, and discoverable content',
+        'Explore verified-style business listings, classifieds, and supporting formats in a clean directory built for scanning and action.',
+      openGraphTitle: 'Business listings and trusted local discovery',
       openGraphDescription:
-        'Discover articles, visual posts, and connected content through a calmer reading-first experience.',
-      keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
+        'Discover businesses, offers, and related content through a structured listing-first experience.',
+      keywords: [
+        'business directory',
+        'company listings',
+        'local services',
+        'B2B listings',
+        'classifieds',
+        'brand discovery',
+        'business search',
+      ],
     },
-    introBadge: 'About the platform',
-    introTitle: 'Built for reading, browsing, and connecting different kinds of content.',
+    introBadge: 'How we present listings',
+    introTitle: 'A directory-first surface for brands, buyers, and browsers.',
     introParagraphs: [
-      'This site brings together article-style reading, visual browsing, and structured discovery so visitors can move naturally between different content types.',
-      'Instead of separating stories, visuals, and supporting resources into disconnected surfaces, the platform keeps them connected in one place with consistent navigation and easier exploration.',
-      'Whether someone starts with a story, an image-led post, a listing, or a resource page, they can keep discovering related content without friction.',
+      'Interawesome is organized around business listings so visitors can compare operators, read context quickly, and move to contact or classified follow-ups without noisy feeds.',
+      'Articles, visuals, profiles, and resources stay available as supporting lanes—useful when you need depth, but never competing with the core listing rhythm.',
+      'Whether someone arrives from search, referral, or curiosity, the layout keeps trust cues, categories, and geography easy to see at a glance.',
     ],
-    sideBadge: 'At a glance',
+    sideBadge: 'Why it feels different',
     sidePoints: [
-      'Reading-first homepage with stronger emphasis on stories and imagery.',
-      'Connected sections for articles, visuals, listings, and supporting resources.',
-      'Cleaner browsing rhythm designed to make exploration feel easier.',
-      'Lightweight interactions that keep the experience fast and readable.',
+      'Listing-first hierarchy with calmer supporting sections.',
+      'Utility-first cards built for scan speed and clarity.',
+      'Lightweight motion that stays out of the way on slower devices.',
+      'Cohesive navy–teal system tuned for professional directories.',
     ],
     primaryLink: {
-      label: 'Browse articles',
-      href: '/articles',
+      label: 'Open listings',
+      href: '/listings',
     },
     secondaryLink: {
-      label: 'See visuals',
-      href: '/images',
+      label: 'Browse classifieds',
+      href: '/classifieds',
     },
   },
   cta: {
-    badge: 'Start exploring',
-    title: 'Explore articles, visuals, and resources through one connected experience.',
+    badge: 'Grow your presence',
+    title: 'Put your business where decision-makers already browse.',
     description:
-      'Move between articles, image-led posts, listings, and resources through one clearer and more connected visual system.',
+      'Claim a structured listing surface with categories, imagery, and contact paths that match how people evaluate vendors today.',
     primaryCta: {
-      label: 'Get Started Free',
+      label: 'Create your listing',
       href: '/register',
     },
     secondaryCta: {
-      label: 'Contact Sales',
+      label: 'Talk with us',
       href: '/contact',
     },
   },
@@ -80,32 +84,32 @@ export const siteContent = {
 
 export const taskPageMetadata: Record<Exclude<TaskKey, 'comment' | 'org' | 'social'>, { title: string; description: string }> = {
   article: {
-    title: 'Articles and stories',
-    description: 'Read articles, stories, guides, and long-form posts across topics and interests.',
+    title: 'Articles and guides',
+    description: 'Editorial pieces, explainers, and long reads that support listing discovery.',
   },
   listing: {
-    title: 'Listings and discoverable pages',
-    description: 'Explore listings, services, brands, and structured pages organized for easier browsing.',
+    title: 'Business listings',
+    description: 'Structured listings for services, brands, and operators you can compare with confidence.',
   },
   classified: {
-    title: 'Classifieds and announcements',
-    description: 'Browse classifieds, offers, notices, and time-sensitive posts across categories.',
+    title: 'Classifieds and offers',
+    description: 'Time-sensitive deals, roles, and notices alongside the main directory.',
   },
   image: {
-    title: 'Images and visual posts',
-    description: 'Explore image-led posts, galleries, and visual stories from across the platform.',
+    title: 'Visual stories',
+    description: 'Image-led posts and galleries that complement listings and articles.',
   },
   profile: {
-    title: 'Profiles and public pages',
-    description: 'Discover public profiles, brand pages, and identity-focused posts in one place.',
+    title: 'Profiles and brands',
+    description: 'Identity pages for businesses, teams, and creators linked across the platform.',
   },
   sbm: {
-    title: 'Curated links and saved resources',
-    description: 'Browse useful links, saved references, and curated resources organized for discovery.',
+    title: 'Saved links and shelves',
+    description: 'Curated bookmarks and reference collections for deeper research.',
   },
   pdf: {
-    title: 'PDFs and downloadable resources',
-    description: 'Open reports, documents, and downloadable resources shared across the platform.',
+    title: 'Documents and downloads',
+    description: 'PDFs, reports, and files that support evaluation and onboarding.',
   },
 }
 

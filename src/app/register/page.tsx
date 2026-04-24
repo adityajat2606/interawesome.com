@@ -1,7 +1,12 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Bookmark, Building2, FileText, Image as ImageIcon, Sparkles } from 'lucide-react'
 import { NavbarShell } from '@/components/shared/navbar-shell'
 import { Footer } from '@/components/shared/footer'
+import { useAuth } from '@/lib/auth-context'
 import { getFactoryState } from '@/design/factory/get-factory-state'
 import { getProductKind } from '@/design/factory/get-product-kind'
 import { REGISTER_PAGE_OVERRIDE_ENABLED, RegisterPageOverride } from '@/overrides/register-page'
@@ -64,6 +69,19 @@ export default function RegisterPage() {
   const productKind = getProductKind(recipe)
   const config = getRegisterConfig(productKind)
   const Icon = config.icon
+  const router = useRouter()
+  const { signup, isAuthenticated, isLoading } = useAuth()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [focusText, setFocusText] = useState('')
+  const [submitError, setSubmitError] = useState('')
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace('/')
+    }
+  }, [isAuthenticated, router])
 
   return (
     <div className={`min-h-screen ${config.shell}`}>
@@ -83,12 +101,33 @@ export default function RegisterPage() {
 
           <div className={`rounded-[2rem] p-8 ${config.panel}`}>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Create account</p>
-            <form className="mt-6 grid gap-4">
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Full name" />
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Email address" />
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Password" type="password" />
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="What are you creating or publishing?" />
-              <button type="submit" className={`inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-semibold ${config.action}`}>Create account</button>
+            <form
+              className="mt-6 grid gap-4"
+              onSubmit={async (event) => {
+                event.preventDefault()
+                setSubmitError('')
+
+                if (!name.trim() || !email.trim() || !password.trim()) {
+                  setSubmitError('Please fill in your name, email, and password.')
+                  return
+                }
+
+                try {
+                  await signup(name, email, password)
+                  router.replace('/')
+                } catch {
+                  setSubmitError('Account creation failed. Please try again.')
+                }
+              }}
+            >
+              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Full name" value={name} onChange={(event) => setName(event.target.value)} />
+              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Email address" value={email} onChange={(event) => setEmail(event.target.value)} />
+              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="What are you creating or publishing?" value={focusText} onChange={(event) => setFocusText(event.target.value)} />
+              {submitError ? <p className="text-sm text-red-500">{submitError}</p> : null}
+              <button type="submit" disabled={isLoading} className={`inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-semibold ${config.action} disabled:cursor-not-allowed disabled:opacity-70`}>
+                {isLoading ? 'Creating account...' : 'Create account'}
+              </button>
             </form>
             <div className={`mt-6 flex items-center justify-between text-sm ${config.muted}`}>
               <span>Already have an account?</span>
