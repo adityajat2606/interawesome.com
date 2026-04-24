@@ -14,6 +14,16 @@ type Props = {
   category?: string;
 };
 
+const taskGridAttr: Partial<Record<TaskKey, "listing" | "classified" | "article" | "image" | "profile" | "sbm" | "pdf" | "default">> = {
+  listing: "listing",
+  classified: "classified",
+  article: "article",
+  image: "image",
+  profile: "profile",
+  sbm: "sbm",
+  pdf: "pdf",
+};
+
 export function TaskListClient({ task, initialPosts, category }: Props) {
   const localPosts = getLocalPostsForTask(task);
 
@@ -52,16 +62,18 @@ export function TaskListClient({ task, initialPosts, category }: Props) {
     });
   }, [category, initialPosts, localPosts]);
 
+  const gridKey = taskGridAttr[task] ?? "default";
+
   if (!merged.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
+      <div className="rounded-xl border border-dashed border-[#1d546d]/25 bg-[#f3f4f4]/80 p-10 text-center text-muted-foreground">
         No posts yet for this section.
       </div>
     );
   }
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div data-task-grid={gridKey} className="pb-2">
       {merged.map((post) => {
         const localOnly = (post as any).localOnly;
         const href = localOnly

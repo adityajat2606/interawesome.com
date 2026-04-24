@@ -65,7 +65,6 @@ export const fetchTaskPosts = async (
 };
 
 export const fetchTaskPostBySlug = async (task: TaskKey, slug: string) => {
-  const allowMockFallback = process.env.NEXT_PUBLIC_USE_MOCK_CONTENT === "true";
   const type = getTaskContentType(task);
   const resolveFromFeed = (feed: SiteFeed<SitePost> | null) =>
     feed?.posts.find((post) => post.slug === slug && getPostType(post) === type) || null;
@@ -79,12 +78,11 @@ export const fetchTaskPostBySlug = async (task: TaskKey, slug: string) => {
     const freshMatch = resolveFromFeed(freshFeed);
     if (freshMatch) return freshMatch;
   } catch {
-    // fall through to mock data
+    // fall through to catalog / mock resolution
   }
 
-  return allowMockFallback
-    ? getMockPostsForTask(task).find((post) => post.slug === slug) || null
-    : null;
+  // Same catalog `getMockPostsForTask` used on the homepage when the feed is empty, so detail URLs must resolve here too.
+  return getMockPostsForTask(task).find((post) => post.slug === slug) || null;
 };
 
 export const buildPostUrl = (task: TaskKey, slug: string) => {

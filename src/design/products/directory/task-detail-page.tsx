@@ -29,10 +29,14 @@ export function DirectoryTaskDetailPage({
 }) {
   const content = post.content && typeof post.content === 'object' ? (post.content as Record<string, unknown>) : {}
   const location = typeof content.address === 'string' ? content.address : typeof content.location === 'string' ? content.location : ''
-  const website = typeof content.website === 'string' ? content.website : ''
+  const website = typeof content.website === 'string' ? content.website.trim() : ''
+  const showWebsite = task !== 'listing' && Boolean(website)
   const phone = typeof content.phone === 'string' ? content.phone : ''
   const email = typeof content.email === 'string' ? content.email : ''
   const highlights = Array.isArray(content.highlights) ? content.highlights.filter((item): item is string => typeof item === 'string') : []
+  const aboutEyebrow =
+    task === 'listing' ? 'About this listing' : task === 'classified' ? 'About this classified' : task === 'profile' ? 'About this profile' : `About this ${task}`
+  const aboutHeading = task === 'listing' ? 'Overview' : 'Details'
   const schemaPayload = {
     '@context': 'https://schema.org',
     '@type': task === 'profile' ? 'Organization' : 'LocalBusiness',
@@ -71,8 +75,8 @@ export function DirectoryTaskDetailPage({
             </div>
 
             <div className="mt-8 rounded-[2rem] border border-slate-200 bg-white p-7 shadow-[0_20px_60px_rgba(15,23,42,0.06)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">About this {task}</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">Structured details instead of a generic content block.</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">{aboutEyebrow}</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em]">{aboutHeading}</h2>
               <p className="mt-4 text-sm leading-8 text-slate-600">{description}</p>
               {highlights.length ? (
                 <div className="mt-6 grid gap-3 md:grid-cols-2">
@@ -102,11 +106,15 @@ export function DirectoryTaskDetailPage({
                 {location ? <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"><MapPin className="h-4 w-4" /> {location}</div> : null}
                 {phone ? <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"><Phone className="h-4 w-4" /> {phone}</div> : null}
                 {email ? <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"><Mail className="h-4 w-4" /> {email}</div> : null}
-                {website ? <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"><Globe className="h-4 w-4" /> {website}</div> : null}
+                {showWebsite ? <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"><Globe className="h-4 w-4" /> {website}</div> : null}
               </div>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                {website ? <a href={website} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800">Visit website <ArrowRight className="h-4 w-4" /></a> : null}
+                {showWebsite ? (
+                  <a href={website} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800">
+                    Visit website <ArrowRight className="h-4 w-4" />
+                  </a>
+                ) : null}
                 <Link href={taskRoute} className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-950 hover:bg-slate-100">Browse more</Link>
               </div>
             </div>
